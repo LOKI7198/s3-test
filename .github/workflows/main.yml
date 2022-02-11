@@ -21,8 +21,10 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::144968974651:role/github-action
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
     - name: Copy files to the test website with the AWS CLI
       run: |
-        aws s3 sync . s3://my-s3-test-website-bucket
+        aws s3 sync . s3://s3testgit
