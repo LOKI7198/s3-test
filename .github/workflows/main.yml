@@ -15,16 +15,16 @@ jobs:
       contents: read
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@main
 
     - name: Configure AWS credentials from Test account
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@main
       with:
-        role-to-assume: arn:aws:iam::144968974651:policy/github-s3full-policy
+        role-to-assume: arn:aws:iam::144968974651:role/s3github
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
     - name: Copy files to the test website with the AWS CLI
       run: |
-        aws s3 sync . s3://s3testgit
+        aws s3 sync . s3://s3github
